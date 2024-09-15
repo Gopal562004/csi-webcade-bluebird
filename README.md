@@ -1,8 +1,12 @@
-# React + Vite
+# CSI Webcade Bluebird — College Peer Tutoring and Mentorship Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a peer-to-peer tutoring and mentorship platform developed during a hackathon.
+It connects college students with mentors or senior students for academic and career guidance.
+Students can request help with specific subjects, book study sessions, or get career advice.
+Mentors can set their availability, and both parties can rate and review each session.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Firebase (Firestore, Authentication, Storage)
+- **Version Control**: Git, GitHub
