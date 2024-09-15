@@ -2,10 +2,9 @@ import React from "react";
 import {
   Card,
   CardContent,
-  CardMedia,
+  Avatar,
   Typography,
   Button,
-  Avatar,
   Box,
   IconButton,
   Divider,
@@ -34,8 +33,8 @@ const MentorCard = ({ mentor }) => {
   } = mentor || {};
 
   // Define the color based on the mark value
-  const statusColor = availability.mark === "green" ? green[500] : red[500];
-  const statusText = availability.mark === "green" ? "Available" : "Not Available";
+  const statusColor = mark === "green" ? green[500] : red[500];
+  const statusText = mark === "green" ? "Available" : "Not Available";
 
   return (
     <Card
@@ -51,10 +50,7 @@ const MentorCard = ({ mentor }) => {
         },
         position: "relative",
       }}
-      className=""
     >
-     
-
       {/* Status Indicator with Tooltip */}
       <Tooltip title={statusText} arrow>
         <Box
@@ -78,7 +74,7 @@ const MentorCard = ({ mentor }) => {
             alt={name}
             src={profileImageUrl}
           >
-            {name ? name.charAt(0) : "N"}
+            {name.charAt(0)}
           </Avatar>
           <Box>
             <Typography variant="h6" component="div" noWrap>
@@ -89,22 +85,19 @@ const MentorCard = ({ mentor }) => {
             </Typography>
           </Box>
         </Box>
-
         {/* Education */}
         <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
           Education: {education}
         </Typography>
-
         {/* Domain */}
-        <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
-          Domains: {domain.join(", ")}
+        <Typography variant="body2" color="text.primary">
+          {Array.isArray(domain) ? domain.join(", ") : "No domain specified"}
         </Typography>
-
         {/* Skills */}
         <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
-          Skills: {skills.join(", ")}
+          Skills:{" "}
+          {Array.isArray(skills) ? skills.join(", ") : "No skills listed"}
         </Typography>
-
         {/* Experience */}
         <Box>
           <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
@@ -118,7 +111,6 @@ const MentorCard = ({ mentor }) => {
             ))}
           </ul>
         </Box>
-
         {/* Publications */}
         <Box>
           <Typography variant="body2" color="text.primary" sx={{ mb: 0.5 }}>
@@ -134,7 +126,6 @@ const MentorCard = ({ mentor }) => {
             ))}
           </ul>
         </Box>
-
         {/* Availability */}
         <Divider sx={{ my: 1 }} />
         <Box sx={{ mb: 1 }}>
@@ -145,7 +136,10 @@ const MentorCard = ({ mentor }) => {
             <Box display="flex" alignItems="center" mb={0.5}>
               <CalendarTodayIcon sx={{ color: grey[600], mr: 0.5 }} />
               <Typography variant="body2" color="text.primary">
-                Days: {availability.days.join(", ")}
+                Days:{" "}
+                {Array.isArray(availability.days)
+                  ? availability.days.join(", ")
+                  : "No availability"}
               </Typography>
             </Box>
             <Box display="flex" alignItems="center">
@@ -156,7 +150,6 @@ const MentorCard = ({ mentor }) => {
             </Box>
           </Box>
         </Box>
-
         {/* Contact */}
         <Divider sx={{ my: 1 }} />
         <Box sx={{ mb: 1 }}>

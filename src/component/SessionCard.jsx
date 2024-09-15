@@ -1,4 +1,3 @@
-// src/component/SessionCard.js
 import React from "react";
 
 const SessionCard = ({ session }) => {
@@ -24,6 +23,10 @@ const SessionCard = ({ session }) => {
         )}
         <p>
           <strong>Status:</strong> {session.status}
+        </p>
+        <p>
+          <strong>Mentor:</strong> {session.mentorName}{" "}
+          {/* Display mentor name */}
         </p>
       </div>
       <button className="mt-4 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700">

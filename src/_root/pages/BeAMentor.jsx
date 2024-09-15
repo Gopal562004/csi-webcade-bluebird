@@ -1,28 +1,50 @@
 import React, { useState } from "react";
+import { addMentorData } from "../../../firebase/services/beMentorServices"; // Import the service function
 
 const BeAMentor = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    education: "",
-    skills: "",
-    domain: "",
     bio: "",
     phone: "",
-    website: "",
     linkedin: "",
+    availability: {
+      days: [],
+      time: { from: "", to: "" },
+    },
+    domain: "",
+    skills: "",
+    profileImageUrl: "", // Image URL
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleDaysChange = (day) => {
+    setFormData({
+      ...formData,
+      availability: {
+        ...formData.availability,
+        days: formData.availability.days.includes(day)
+          ? formData.availability.days.filter((d) => d !== day)
+          : [...formData.availability.days, day],
+      },
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    try {
+      const mentorId = await addMentorData(formData);
+      console.log("Mentor added with ID: ", mentorId);
+    } catch (error) {
+      console.error("Error adding mentor data: ", error);
+    }
     console.log("Form Submitted:", formData);
   };
 
@@ -38,6 +60,17 @@ const BeAMentor = () => {
           className="w-full flex flex-col items-center"
         >
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Profile Image URL */}
+            <input
+              type="url"
+              id="profileImageUrl"
+              name="profileImageUrl"
+              value={formData.profileImageUrl}
+              onChange={handleChange}
+              placeholder="Profile Image URL"
+              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
+            />
+
             {/* Name */}
             <input
               type="text"
@@ -63,30 +96,6 @@ const BeAMentor = () => {
             />
           </div>
 
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            {/* Education */}
-            <input
-              type="text"
-              id="education"
-              name="education"
-              value={formData.education}
-              onChange={handleChange}
-              placeholder="Enter your Education"
-              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
-            />
-
-            {/* Skills */}
-            <input
-              type="text"
-              id="skills"
-              name="skills"
-              value={formData.skills}
-              onChange={handleChange}
-              placeholder="Enter your Skills"
-              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
-            />
-          </div>
-
           <div className="w-full mt-4">
             {/* Bio */}
             <textarea
@@ -98,20 +107,59 @@ const BeAMentor = () => {
               className="w-full h-[70px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
             />
           </div>
-          {/* Domain */}
-          <div className="w-full mt-4">
+
+          {/* Availability (Days) */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.availability.days.includes("Monday")}
+                onChange={() => handleDaysChange("Monday")}
+              />
+              Monday
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.availability.days.includes("Wednesday")}
+                onChange={() => handleDaysChange("Wednesday")}
+              />
+              Wednesday
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.availability.days.includes("Friday")}
+                onChange={() => handleDaysChange("Friday")}
+              />
+              Friday
+            </label>
+          </div>
+
+          {/* Time */}
+          <div className="w-full grid grid-cols-2 gap-4 mt-4">
             <input
-              type="text"
-              id="domain"
-              name="domain"
-              value={formData.domain}
+              type="time"
+              id="from"
+              name="availability.time.from"
+              value={formData.availability.time.from}
               onChange={handleChange}
-              placeholder="Enter your Domain (e.g., Web Development, Testing)"
+              placeholder="From"
+              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
+            />
+            <input
+              type="time"
+              id="to"
+              name="availability.time.to"
+              value={formData.availability.time.to}
+              onChange={handleChange}
+              placeholder="To"
               className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
             />
           </div>
+
+          {/* Contact (Phone and LinkedIn) */}
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            {/* Phone */}
             <input
               type="tel"
               id="phone"
@@ -121,21 +169,6 @@ const BeAMentor = () => {
               placeholder="Phone Number"
               className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
             />
-
-            {/* Website */}
-            <input
-              type="url"
-              id="website"
-              name="website"
-              value={formData.website}
-              onChange={handleChange}
-              placeholder="Website URL"
-              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
-            />
-          </div>
-
-          <div className="w-full mt-4">
-            {/* LinkedIn */}
             <input
               type="url"
               id="linkedin"
@@ -143,6 +176,32 @@ const BeAMentor = () => {
               value={formData.linkedin}
               onChange={handleChange}
               placeholder="LinkedIn Profile URL"
+              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
+            />
+          </div>
+
+          {/* Skills */}
+          <div className="w-full mt-4">
+            <input
+              type="text"
+              id="skills"
+              name="skills"
+              value={formData.skills}
+              onChange={handleChange}
+              placeholder="Enter your Skills (comma-separated)"
+              className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
+            />
+          </div>
+
+          {/* Domain */}
+          <div className="w-full mt-4">
+            <input
+              type="text"
+              id="domain"
+              name="domain"
+              value={formData.domain}
+              onChange={handleChange}
+              placeholder="Enter your Domain (e.g., Web Development)"
               className="w-full h-[50px] rounded-md px-3 text-[#000] bg-transparent border-2 border-gray-200 outline-[#06f]"
             />
           </div>

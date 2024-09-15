@@ -30,13 +30,15 @@ const FindMyMentor = () => {
     fetchMentors();
   }, []);
 
-  const filteredMentors = mentors.filter(
-    (mentor) =>
-      mentor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+const filteredMentors = mentors.filter(
+  (mentor) =>
+    mentor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (Array.isArray(mentor.domain) &&
       mentor.domain.some((d) =>
         d.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-  );
+      ))
+);
+
 
   // Shuffle the filtered mentors array
   const shuffledMentors = shuffleArray(filteredMentors);
