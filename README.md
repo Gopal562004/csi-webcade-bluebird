@@ -12,7 +12,7 @@ Mentors can set their availability, and both parties can rate and review each se
 - **Version Control**: Git, GitHub
 
 -SS
-![Screenshot 1](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss1.png)
 ![Screenshot 3](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss3.png)
-![Screenshot 4](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss7.png)
+![Screenshot 4](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss4.png)
+![Screenshot 1](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss1.png)
 ![Screenshot 2](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss2.png)
