@@ -14,5 +14,4 @@ Mentors can set their availability, and both parties can rate and review each se
 -SS
 ![Screenshot 3](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss3.png)
 ![Screenshot 2](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss2.png)
-![Screenshot 4](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss4.png)
 ![Screenshot 1](https://github.com/Gopal562004/csi-webcade-bluebird/blob/main/visuals/ss1.png)
