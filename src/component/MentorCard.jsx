@@ -80,7 +80,11 @@ const MentorCard = ({ mentor }) => {
             <Typography variant="h6" component="div" noWrap>
               {name}
             </Typography>
-            <Typography variant="body2" color="text.secondary" Wrap>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ whiteSpace: "pre-wrap" }}
+            >
               {bio}
             </Typography>
           </Box>
